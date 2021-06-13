@@ -1,0 +1,38 @@
+cd ~
+wget http://sourceforge.net/projects/webiopi/files/WebIOPi-0.7.1.tar.gz
+tar xvzf WebIOPi-0.7.1.tar.gz
+cd WebIOPi-0.7.1
+wget https://raw.githubusercontent.com/doublebind/raspi/master/webiopi-pi2bplus.patch
+patch -p1 -i webiopi-pi2bplus.patch
+sudo ./setup.sh
+
+
+
+wget https://github.com/weaved/installer/raw/master/binaries/weaved-nixinstaller_1.2.13.bin
+chmod +x weaved-nixinstaller_1.2.13.bin
+
+./weaved-nixinstaller_1.2.13.bin
+cd /var/www/
+sudo nano index.html
+
+https://developer.weaved.com/portal/login.php?error=NoSession
+
+"sudo /usr/bin/Weavedweb80.sh start|stop|restart"
+https://www.weaved.com/installing-weaved-raspberry-pi-raspbian-os/
+
+*************************************************************************************************************
+Next, you need to reconfigure WebIOPi to use the /home/pi/project/html directory as its document root. Run the
+
+sudo nano /etc/webiopi/config
+command to open the config file in the nano text editor and add the doc-root = /home/pi/project/html line in the [HTTP] section. Save the changes and restart WebIOPi using
+
+sudo /etc/init.d/webiopi restart
+Now, point your browser to http://raspberrypi:8000, and you should see the new web app in all its bare-bones glory. Press the button to turn the LED on and off.
+***************************************************
+http://192.168.1.4:8000/app/gpio-header
+
+sudo update-rc.d webiopi defaults
+
+https://raspberrypi.stackexchange.com/questions/56413/error-problem-connecting-to-raspberry-pi-3-with-xrdp
+
+/usr/share/webiopi/htdocs/

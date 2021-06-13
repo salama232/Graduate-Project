@@ -1,0 +1,163 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head>
+<meta content="text/html; charset=ISO-8859-1" http-equiv="content-type"><title>index</title>
+<script type="text/javascript" src="/webiopi.js"></script>
+<style type="text/css"></style>
+</head>
+<body style="color: rgb(0, 0, 0); background-color: rgb(51, 204, 0);" alink="#000099" link="#000099" vlink="#990099">
+<table style="width: 40%; height: 401px; text-align: left; margin-left: auto; margin-right: auto; background-color: rgb(51, 51, 255);" border="0" cellpadding="2" cellspacing="2">
+<tbody>
+<tr align="center">
+<td style="height: 115px; background-color: rgb(51, 51, 255);"><img style="width: 84px; height: 104px;" alt="Tree" src="images/nicubunu_Christmas_Tree.png"></td>
+<td style="height: 115px; font-family: Heartbreaker; color: white; background-color: rgb(51, 51, 255);"><big><big><big><big><big><big>Merry
+Christmas</big></big></big></big></big></big></td>
+<td style="height: 115px;"><img style="width: 84px; height: 104px;" alt="Tree" src="images/nicubunu_Christmas_Tree.png"></td>
+</tr>
+<tr>
+<td style="height: 276px;" colspan="3" rowspan="1">
+<table style="height: 317px; text-align: left; margin-left: auto; margin-right: auto; width: 305px; background-color: rgb(51, 51, 255);" border="0" cellpadding="2" cellspacing="2">
+<tbody>
+<tr>
+<td colspan="2" rowspan="1" style="width: 163px;"></td>
+</tr>
+<tr>
+<td style="text-align: center; width: 101px;"><img style="width: 82px; height: 82px;" alt="button" src="images/off.png" id="btn1" onclick="clickHandler(this)"></td>
+<td style="width: 163px; font-family: Comic Sans MS;"><big style="color: white;"><big>Outside Lights</big></big></td>
+</tr>
+<tr>
+<td style="text-align: center; width: 101px;"><img style="width: 82px; height: 82px;" alt="button" src="images/off.png" id="btn2" onclick="clickHandler(this)"></td>
+<td style="width: 163px;"><big style="color: white;"><big><span style="font-family: Comic Sans MS;">Fire Place</span></big></big></td>
+</tr>
+<tr>
+<td style="text-align: center; width: 101px;"><img style="width: 82px; height: 82px;" alt="button" src="images/off.png" id="btn3" onclick="clickHandler(this)"></td>
+<td style="width: 163px;"><big style="color: white;"><big><span style="font-family: Comic Sans MS;">Christmas Tree</span></big></big></td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+<tr>
+</tr>
+</tbody>
+</table>
+<br>
+<script>
+
+
+webiopi().ready(function() {
+
+	webiopi().setFunction(7,"OUT");
+	webiopi().setFunction(8,"OUT");
+	webiopi().setFunction(25,"OUT");
+	webiopi().setFunction(11,"IN");
+	webiopi().setFunction(9,"IN");
+	webiopi().setFunction(10,"IN");
+
+	webiopi().refreshGPIO(true);
+	window.onload = function(){
+		get_stat();
+	}
+
+	setInterval("get_stat();", 100);{
+	}
+	
+
+});
+
+function get_stat()
+{
+	if (webiopi().digitalRead(10))
+	{
+		document.getElementById("btn1").src = "images/on.png";
+	}
+	else
+	{
+		document.getElementById("btn1").src = "images/off.png";
+	}
+
+	if (webiopi().digitalRead(11))
+	{
+		document.getElementById("btn2").src = "images/on.png";
+	}
+	else
+	{
+		document.getElementById("btn2").src = "images/off.png";
+	}
+
+	if (webiopi().digitalRead(9))
+	{
+		document.getElementById("btn3").src = "images/on.png";
+	}
+	else
+	{
+		document.getElementById("btn3").src = "images/off.png";
+	}
+}
+
+
+function clickHandler(element)
+{
+
+var state1, state2, state3;
+var val1, val2, val3;
+
+if (element.id == "btn1")
+{
+    val1 = webiopi().digitalRead(10);
+    if (val1 == 1)
+    {
+        webiopi().digitalWrite(7,0);
+        state1 = element.baseURI + "images/off.png";
+	element.src = state1;
+	window.location.href = 'http://192.168.1.30/cgi-bin/BT_Deactivate.sh';
+    }
+    else
+    {
+        webiopi().digitalWrite(7,1);
+        state1 = element.baseURI + "images/on.png";
+	element.src = state1;
+	window.location.href = 'http://192.168.1.30/cgi-bin/BT_Activate.sh';
+    }
+    
+}
+
+else if (element.id== "btn2")
+{
+    val2 = webiopi().digitalRead(11);
+    if (val2 == 1)
+    {
+        webiopi().digitalWrite(8,0);
+        state2 = element.baseURI + "images/off.png";
+	element.src = state2;
+    }
+    else
+    {
+        webiopi().digitalWrite(8,1);
+        state2 = element.baseURI + "images/on.png";
+	element.src = state2;
+    }
+    
+}
+
+else if (element.id == "btn3")
+{
+    val3 = webiopi().digitalRead(9);
+    if (val3 == 1)
+    {
+        webiopi().digitalWrite(25,0);
+        state3 = element.baseURI + "images/off.png";
+	element.src = state3;
+    }
+    else
+    {
+        webiopi().digitalWrite(25,1);
+        state3 = element.baseURI + "images/on.png";
+	element.src = state3;
+    }
+    
+}
+
+
+}
+</script>
+</body></html>

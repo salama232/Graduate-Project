@@ -1,0 +1,93 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport"
+ content="height = device-height, width = 420, user-scalable = no">
+  <title>salama</title>
+  <script type="text/javascript" src="/webiopi.js"></script>
+  <script type="text/javascript">
+function init() {
+}
+function Stop() {
+webiopi().callMacro("ButtonStop");
+}
+function Forward() {
+webiopi().callMacro("ButtonForward");
+}
+function Reverse() {
+webiopi().callMacro("ButtonReverse");
+}
+function TurnLeft() {
+webiopi().callMacro("ButtonTurnLeft");
+}
+function TurnRight() {
+webiopi().callMacro("ButtonTurnRight");
+}
+
+function gopen() {
+webiopi().callMacro("Buttonopen");
+}
+function gclose() {
+webiopi().callMacro("Buttonclose");
+}
+
+webiopi().ready(init);
+  </script>
+  <style type="text/css">
+button.small {
+margin: 1px 1px 1px 1px;
+width: 24px;
+height: 24px;
+font-size: 12pt;
+font-weight: bold;
+color: black;
+}
+button {
+margin: 1px 1px 1px 1px;
+width: 90px;
+height: 24px;
+font-size: 12pt;
+font-weight: bold;
+color: black;
+}
+  </style>
+</head>
+<body>
+<center>
+<div id="content" style="height: 100%; width: 100%;" align="center">
+<div id="video">
+<center><img src="http://192.168.1.6:8081/?action=stream"
+ height="320" width="480"> </center>
+</div>
+<div id="table" style="position: relative; top: -150px; z-index: 2;">
+<table style="width: 400px; height: 150px;">
+  <tbody>
+    <tr>
+      <td colspan="3" align="center"><button class="long" type="button"
+ onmousedown="Forward()">Forward</button></td>
+    </tr>
+    <tr>
+      <td><button type="button" onmousedown="TurnLeft()">Left</button></td>
+      <td><button type="button" onclick="Stop()">Stop</button></td>
+      <td><button type="button" onmousedown="TurnRight()">Right</button></td>
+    </tr>
+    <tr>
+      <td style="text-align: center;" colspan="3"><button type="button"
+ onmousedown="Reverse()">Reverse</button></td>
+    </tr>
+    <tr>
+       <td ><button type="button" onmousedown="TurnRight()">up</button></td>
+       <td style="text-align: center;" colspan="3"><button type="button" onmousedown="TurnRight()">Down</button></td>
+    </tr>
+    <tr>
+	  <td><button type="button" onmousedown="gopen()">open</button></td>
+	  <td style="text-align: center;" colspan="3"><button type="button" onmousedown="gclose()">close</button></td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+</center>
+</body>
+</html>

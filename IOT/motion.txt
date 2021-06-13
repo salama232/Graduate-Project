@@ -1,0 +1,37 @@
+sudo apt-get remove libavcodec-extra-56 libavformat56 libavresample2 libavutil54
+wget https://github.com/ccrisan/motioneye/wiki/precompiled/ffmpeg_3.1.1-1_armhf.deb
+sudo dpkg -i ffmpeg_3.1.1-1_armhf.deb
+sudo apt-get install curl libssl-dev libcurl4-openssl-dev libjpeg-dev libx264-142 libavcodec56 libavformat56 libmysqlclient18 libswscale3 libpq5
+wget https://github.com/Motion-Project/motion/releases/download/release-4.0.1/pi_jessie_motion_4.0.1-1_armhf.deb
+sudo dpkg -i pi_jessie_motion_4.0.1-1_armhf.deb
+Find the following lines and change them to the following.
+daemon on
+stream_localhost off
+Note: Change the following two lines from on to off if you’re having issues with the stream freezing whenever motion occurs.
+output_pictures off
+ffmpeg_output_movies off
+Optional (Don’t include the text in brackets)
+stream_maxrate 100 (This will allow for real-time streaming but requires more bandwidth & resources)
+framerate 100 (This will allow for 100 frames to be captured per second allowing for smoother video)
+width 640 (This changes the width of the image displayed)
+height 480 (This changes the height of the image displayed)
+Now we need to setup up the daemon, first we need to edit the motion file.
+sudo nano /etc/default/motion
+Find the following line and change it to the following:
+start_motion_daemon=yes
+Once you’re done simply save and exit by pressing ctrl+x then y.
+Now make sure the camera is connected and run the following line:
+sudo service motion start
+If you need to stop the service, simply run the following command:
+sudo service motion stop
+Now you should be able to check out the Webcam Stream at the IP address of our Pi so in your browser go to the following address:
+192.168.1.103:8081
+If the webpage isn’t loading try restarting the service.
+sudo service motion restart
+
+
+
+
+
+//////////////////////////
+https://pimylifeup.com/raspberry-pi-webcam-server/
